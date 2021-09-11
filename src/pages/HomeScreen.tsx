@@ -1,35 +1,30 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  Task,
-  FlatList,
-} from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import {
-  createNativeStackNavigator,
-  NativeStackScreenProps,
-} from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../Routes";
 
 import Button from "../components/Button";
 import TaskCard from "../components/TaskCard";
-import { RootStackParamList } from "../Routes";
 import Input from "../components/Input";
 
-export interface TasksData {
+export interface ShortTasksData {
   id: string;
   name: string;
+}
+export interface TaskData {
+  id: string;
+  name: string;
+  dueDate: Date;
+  description: string;
 }
 
 type HomeScreenProp = StackNavigationProp<RootStackParamList, "HomeScreen">;
 
 export default function HomeScreen() {
   const [newTask, setNewTask] = useState("");
-  const [myTasks, setMyTasks] = useState<TasksData[]>([]);
+  const [myTasks, setMyTasks] = useState<ShortTasksData[]>([]);
 
   const navigation = useNavigation<HomeScreenProp>();
 

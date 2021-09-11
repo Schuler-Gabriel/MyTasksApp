@@ -1,8 +1,10 @@
-import Moment from "moment";
 import React, { useEffect, useState } from "react";
 import { Text, StyleSheet, ScrollView } from "react-native";
+
+import Moment from "moment";
+
 import DetailCard from "../components/detailCard";
-import { TaskProps } from "./AddNewTaskScreen";
+import { TaskData } from "./HomeScreen";
 
 const initialTask = {
   id: "",
@@ -12,7 +14,7 @@ const initialTask = {
 };
 
 export default function TaskScreen() {
-  const [taskDetails, setTaskDetails] = useState<TaskProps>(initialTask);
+  const [taskDetails, setTaskDetails] = useState<TaskData>(initialTask);
 
   const task = {
     id: "1",
