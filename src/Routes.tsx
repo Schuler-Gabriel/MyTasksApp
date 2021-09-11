@@ -4,7 +4,7 @@ import {} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import HomeScreen from "./pages/HomeScreen";
+import HomeScreen, { TaskData } from "./pages/HomeScreen";
 import TaskScreen from "./pages/TaskDetailsScreen";
 import AddNewTaskScreen from "./pages/AddNewTaskScreen";
 
@@ -12,7 +12,7 @@ const Stack = createNativeStackNavigator();
 
 export type RootStackParamList = {
   HomeScreen: undefined;
-  TaskDetailsScreen: undefined;
+  TaskDetailsScreen: TaskData;
   AddNewTaskScreen: undefined;
 };
 

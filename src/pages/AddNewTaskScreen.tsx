@@ -46,6 +46,12 @@ export default function AddNewTaskScreen() {
 
   function handleSaveTask() {
     navigation.navigate("HomeScreen");
+    // navigation.navigate("HomeScreen", {
+    //   id: new Date().getTime(),
+    //   name: string,
+    //   dueDate: Date,
+    //   description: string,
+    // });
   }
 
   return (
