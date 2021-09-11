@@ -9,7 +9,7 @@ import { TaskData } from "./HomeScreen";
 const initialTask = {
   id: "",
   name: "",
-  dueDate: new Date("sept 13, 2021"),
+  dueDate: new Date(),
   description: "",
 };
 
