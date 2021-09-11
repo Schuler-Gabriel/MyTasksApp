@@ -4,6 +4,7 @@ import { ScrollView, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../Routes";
+import { useRoute, RouteProp } from "@react-navigation/native";
 
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Moment from "moment";
@@ -17,6 +18,11 @@ type AddNewTaskProp = StackNavigationProp<
   "AddNewTaskScreen"
 >;
 
+type AddNewTaskScreenRouteProp = RouteProp<
+  RootStackParamList,
+  "AddNewTaskScreen"
+>;
+
 export default function AddNewTaskScreen() {
   const [newDate, setNewDate] = useState<String>(
     Moment(new Date().getTime()).format("MMM DD, yyyy")
@@ -25,11 +31,7 @@ export default function AddNewTaskScreen() {
   const [newTask, setNewTask] = useState<TaskData>();
 
   const navigation = useNavigation<AddNewTaskProp>();
-
-  const task = {
-    id: "1",
-    name: "Estudar React Native",
-  };
+  const route = useRoute<AddNewTaskScreenRouteProp>();
 
   function showDatePicker() {
     setDateVisibility(true);
@@ -56,7 +58,7 @@ export default function AddNewTaskScreen() {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.taskName}>{task.name}</Text>
+      <Text style={styles.taskName}>{route.params.name}</Text>
 
       <Text style={styles.detailName}>Due date:</Text>
 

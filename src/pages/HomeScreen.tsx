@@ -12,7 +12,6 @@ import TaskCard from "../components/TaskCard";
 import Input from "../components/Input";
 
 export interface ShortTasksData {
-  id: string;
   name: string;
 }
 export interface TaskData {
@@ -33,18 +32,14 @@ const task = {
 type HomeScreenProp = StackNavigationProp<RootStackParamList, "HomeScreen">;
 
 export default function HomeScreen() {
-  const [newTask, setNewTask] = useState<String>();
+  const [newTask, setNewTask] = useState<string>("");
   const [myTasks, setMyTasks] = useState<TaskData[]>([task]);
 
   const navigation = useNavigation<HomeScreenProp>();
   const routes = useRoute();
 
   function handleAddTask() {
-    const data = {
-      id: String(new Date().getTime()),
-      name: newTask,
-    };
-    navigation.navigate("AddNewTaskScreen");
+    navigation.navigate("AddNewTaskScreen", { name: newTask });
   }
 
   return (
