@@ -11,7 +11,7 @@ import AddNewTaskScreen from "./pages/AddNewTaskScreen";
 const Stack = createNativeStackNavigator();
 
 export type RootStackParamList = {
-  HomeScreen: undefined;
+  HomeScreen: TaskData;
   TaskDetailsScreen: TaskData;
   AddNewTaskScreen: ShortTasksData;
 };

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
 
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../Routes";
 
@@ -21,26 +21,31 @@ export interface TaskData {
   description: string;
 }
 
-const task = {
-  id: "1",
-  name: "Estudar Flutter",
-  dueDate: String(Moment(new Date().getTime()).format("MMM DD, yyyy")),
-  description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id diam maecenas ultricies mi eget mauris pharetra et ultrices. ",
-};
-
 type HomeScreenProp = StackNavigationProp<RootStackParamList, "HomeScreen">;
+type HomeScreenRouteProp = RouteProp<RootStackParamList, "HomeScreen">;
 
 export default function HomeScreen() {
   const [newTask, setNewTask] = useState<string>("");
-  const [myTasks, setMyTasks] = useState<TaskData[]>([task]);
+  const [myTasks, setMyTasks] = useState<TaskData[]>([]);
 
   const navigation = useNavigation<HomeScreenProp>();
-  const routes = useRoute();
+  const route = useRoute<HomeScreenRouteProp>();
 
   function handleAddTask() {
     navigation.navigate("AddNewTaskScreen", { name: newTask });
   }
+
+  useEffect(() => {
+    if (route.params?.id) {
+      const task = {
+        id: route.params.id,
+        name: route.params.name,
+        dueDate: route.params.dueDate,
+        description: route.params.description,
+      };
+      setMyTasks((oldState) => [...oldState, task]);
+    }
+  }, [route.params?.id]);
 
   return (
     <View style={styles.container}>

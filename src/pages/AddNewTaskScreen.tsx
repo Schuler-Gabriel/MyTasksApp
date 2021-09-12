@@ -28,7 +28,7 @@ export default function AddNewTaskScreen() {
     Moment(new Date().getTime()).format("MMM DD, yyyy")
   );
   const [dateVisibility, setDateVisibility] = useState(false);
-  const [newTask, setNewTask] = useState<TaskData>();
+  const [newDescription, setNewDescription] = useState<string>("");
 
   const navigation = useNavigation<AddNewTaskProp>();
   const route = useRoute<AddNewTaskScreenRouteProp>();
@@ -42,18 +42,21 @@ export default function AddNewTaskScreen() {
   }
 
   function handleConfirm(date: Date) {
-    setNewDate(Moment(date).format("MMM DD, yyyy"));
+    setNewDate(String(Moment(date).format("MMM DD, yyyy")));
     hideDatePicker();
   }
 
   function handleSaveTask() {
-    navigation.navigate("HomeScreen");
-    // navigation.navigate("HomeScreen", {
-    //   id: new Date().getTime(),
-    //   name: string,
-    //   dueDate: Date,
-    //   description: string,
-    // });
+    navigation.navigate({
+      name: "HomeScreen",
+      params: {
+        id: String(new Date().getTime()),
+        name: route.params.name,
+        dueDate: String(newDate),
+        description: newDescription,
+      },
+      merge: true,
+    });
   }
 
   return (
@@ -75,7 +78,11 @@ export default function AddNewTaskScreen() {
 
       <Text style={styles.detailName}>Description:</Text>
 
-      <Input inputDescription={"enter a description"} multiline={true} />
+      <Input
+        inputDescription={"enter a description"}
+        multiline={true}
+        onChangeText={setNewDescription}
+      />
 
       <Button title={"Save task"} onPress={handleSaveTask} />
     </ScrollView>
